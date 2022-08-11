@@ -1,0 +1,12 @@
+{
+    "id": "3d9f72e4-94dc-47ee-ade7-4b8315939139",
+    "firstName": "kakak",
+    "lastName": "adik",
+    "age": 30,
+    "occupation": "software developer",
+    "nationality": "singapore",
+    "hobbies": ["reading book"],
+    "gender": "MALE",
+    "createdDate": "2022-08-10T08:08:36.019Z",
+    "updatedDate": "2022-08-10T08:08:36.019Z"
+  }

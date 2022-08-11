@@ -1,0 +1,14 @@
+{
+    "id": "string",
+    "firstName": "kakak",
+    "lastName": "adik",
+    "age": 30,
+    "occupation": "QA Automation",
+    "nationality": "Indonesia",
+    "hobbies": [
+      "reading book"
+    ],
+    "gender": "MALE",
+    "createdDate": "2022-08-10T07:34:18.316Z",
+    "updatedDate": ""
+  }
