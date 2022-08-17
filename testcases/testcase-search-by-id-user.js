@@ -13,11 +13,20 @@ chai.use(require('chai-things'));
 chai.use(require('chai-json-schema'));
 
 describe(`${createUserScenario.searchByIdUserScenario.description}`, async () => {
+  let responApi;
+  before( async ()=> {
+    responseApi = await api.postUser(requestBodyPost);
+  })
+
+  after ( async ()=>{
+    responseApi = await api.removeAll();
+  })
+  
   it(`${createUserScenario.searchByIdUserScenario.positive.case1}`, async () => {
-    const id = "3d9f72e4-94dc-47ee-ade7-4b8315939139";
-    let responApi = await api.getUserById(id);
+    // const id = "3d9f72e4-94dc-47ee-ade7-4b8315939139";
+    let responApi = await api.getUserById(responseApi._body.id);
     expect(responApi.statusCode).to.equal(200);
-    expect(responApi.body.id).to.equal(id);
+    expect(responApi.body.id).to.equal(responseApi._body.id);
     expect(responApi.body).has.jsonSchema(jsonSchemaGetId);
   })
 

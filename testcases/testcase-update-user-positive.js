@@ -14,9 +14,29 @@ chai.use(require('chai-things'));
 chai.use(require('chai-json-schema'));
 
 describe(`${createUserScenario.updateUserScenario.description}`, async () => {
-  
+  let responseApi;
+  before ( async()=>{
+    responseApi = await api.postUser(requestBodyPost);
+  })
+
+  after ( async()=>{
+    responseAPi = await api.removeAll();
+  }) 
+
   it(`${createUserScenario.updateUserScenario.positive.case1}`, async () => {
-    let responseApi = await api.putUser(requestBodyPut);
+    const sendRequestPut = {
+      id: responseApi._body.id,
+      firstName: "kakek",
+      lastName: "nenek",
+      age: 30,
+      occupation: "software developer",
+      nationality: "singapore",
+      hobbies: ["reading book"],
+      gender: "MALE",
+      createdDate: "2022-08-10T08:08:36.019Z",
+      updatedDate: "2022-08-10T08:08:36.019Z"
+    }
+    responseApi = await api.putUser(sendRequestPut);
     expect(responseApi.statusCode).to.equal(200);
     expect(responseApi.request._data.occupation).to.equal(requestBodyPut.occupation);
     expect(responseApi.request._data.nationality).to.equal(requestBodyPut.nationality);

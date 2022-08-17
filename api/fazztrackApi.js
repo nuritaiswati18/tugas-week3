@@ -32,9 +32,16 @@ function getUserById(id) {
     .set('Content-type', 'application/json')
 }
 
+function removeAll() {
+  return URL.delete(`/v1/users/removeAll`)
+  .set('Connection', 'keep-alive')
+  .set('Content-type', 'application/json')
+}
+
 module.exports = {
   getUser,
   postUser,
   putUser,
   getUserById,
+  removeAll
 };

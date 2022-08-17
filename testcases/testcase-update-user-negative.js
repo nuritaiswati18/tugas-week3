@@ -14,7 +14,15 @@ chai.use(require('chai-things'));
 chai.use(require('chai-json-schema'));
 
 describe(`${createUserScenario.updateUserScenario.description}`, async () => {
-  
+  let responseApi;
+  before ( async()=>{
+    responseApi = await api.postUser(requestBodyPost);
+  })
+
+  after ( async()=>{
+    responseAPi = await api.removeAll();
+  })
+
   it(`${createUserScenario.updateUserScenario.negative.case1}`, async () => {
     let responseApi = await api.putUser(requestBodyPut);
     let err = "you must specify data for firstname, lastName, age, occupation, nationality, hobbies (at least 1), and gender"
