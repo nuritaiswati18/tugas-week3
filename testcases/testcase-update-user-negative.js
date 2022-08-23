@@ -20,11 +20,23 @@ describe(`${createUserScenario.updateUserScenario.description}`, async () => {
   })
 
   after ( async()=>{
-    responseAPi = await api.removeAll();
+    responseApi = await api.removeAll();
   })
 
   it(`${createUserScenario.updateUserScenario.negative.case1}`, async () => {
-    let responseApi = await api.putUser(requestBodyPut);
+    const sendRequestPut = {
+      id: responseApi._body.id,
+      firstName: requestBodyPut.firstName,
+      lastName: requestBodyPut.lastName,
+      age: 0,
+      occupation: requestBodyPut.occupation,
+      nationality: requestBodyPut.nationality,
+      hobbies: requestBodyPut.hobbies,
+      gender: requestBodyPut.gender,
+      createdDate: requestBodyPut.createdDate,
+      updatedDate: requestBodyPut.updatedDate
+    }
+    responseApi = await api.putUser(sendRequestPut);
     let err = "you must specify data for firstname, lastName, age, occupation, nationality, hobbies (at least 1), and gender"
     let errorCode = "ER-03";
     expect(responseApi._body.statusCode).to.equal(400);
@@ -33,7 +45,19 @@ describe(`${createUserScenario.updateUserScenario.description}`, async () => {
     expect(responseApi._body.errorCode).to.equal(errorCode);
   })
   it(`${createUserScenario.updateUserScenario.negative.case2}`, async () => {
-    let responseApi = await api.putUser(requestBodyPut);
+    const sendRequestPut = {
+      id: responseApi._body.id,
+      firstName: requestBodyPut.firstName,
+      lastName: requestBodyPut.lastName,
+      age: requestBodyPut.age,
+      occupation: requestBodyPut.occupation,
+      nationality: requestBodyPut.nationality,
+      hobbies: [],
+      gender: requestBodyPut.gender,
+      createdDate: requestBodyPut.createdDate,
+      updatedDate: requestBodyPut.updatedDate
+    }
+    responseApi = await api.putUser(sendRequestPut);
     let err = 'you must specify data for firstname, lastName, age, occupation, nationality, hobbies (at least 1), and gender';
     let errorCode = "ER-03";
     expect(responseApi._body.statusCode).to.equal(400);
@@ -42,7 +66,19 @@ describe(`${createUserScenario.updateUserScenario.description}`, async () => {
     expect(responseApi._body.errorCode).to.equal(errorCode);
   })
   it(`${createUserScenario.updateUserScenario.negative.case3}`, async () => {
-    let responseApi = await api.putUser(requestBodyPut);
+    const sendRequestPut = {
+      id: null,
+      firstName: requestBodyPut.firstName,
+      lastName: requestBodyPut.lastName,
+      age: requestBodyPut.age,
+      occupation: requestBodyPut.occupation,
+      nationality: requestBodyPut.nationality,
+      hobbies: requestBodyPut.hobbies,
+      gender: requestBodyPut.gender,
+      createdDate: requestBodyPut.createdDate,
+      updatedDate: requestBodyPut.updatedDate
+    }
+    responseApi = await api.putUser(sendRequestPut);
     let err = "you must specify data for firstname, lastName, age, occupation, nationality, hobbies (at least 1), and gender";
     let errorCode = "ER-03";
     expect(responseApi._body.statusCode).to.equal(400);
